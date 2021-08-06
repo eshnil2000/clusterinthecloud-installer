@@ -26,7 +26,8 @@ def main():
     parser.add_argument("--region", help="AWS region")
     parser.add_argument("--availability_zone", help="AWS availability zone")
     parser.add_argument("--profile", help="AWS credentials profile")
-    parser.add_argument("--terraform-repo", default="clusterinthecloud/terraform", help="CitC Terraform GitHub project repo to use")
+    parser.add_argument("--terraform-repo", default="eshnil2000/clusterinthecloud-terraform", help="CitC Terraform GitHub project repo to use")
+    #parser.add_argument("--terraform-repo", default="clusterinthecloud/terraform", help="CitC Terraform GitHub project repo to use")
     parser.add_argument("--terraform-branch", default="master", help="CitC Terraform branch to use")
     parser.add_argument("--ansible-repo", help="CitC Ansible repo to use")
     parser.add_argument("--ansible-branch", help="CitC Ansible branch to use")
@@ -54,7 +55,8 @@ def main():
     tf_repo_tar, _ = urlretrieve("https://github.com/{repo}/archive/{branch}.tar.gz".format(repo=args.terraform_repo, branch=args.terraform_branch))
     tarfile.open(tf_repo_tar).extractall()
     shutil.rmtree("citc-terraform", ignore_errors=True)
-    os.rename("terraform-{branch}".format(branch=args.terraform_branch), "citc-terraform")
+    os.rename("clusterinthecloud-terraform-{branch}".format(branch=args.terraform_branch), "citc-terraform")
+    #os.rename("terraform-{branch}".format(branch=args.terraform_branch), "citc-terraform")
     os.chdir("citc-terraform")
 
     # Download Terraform binary
@@ -161,3 +163,4 @@ def aws_config_file(config, args):
 
 if __name__ == "__main__":
     main()
+
